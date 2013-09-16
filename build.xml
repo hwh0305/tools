@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="jar" name="tools">
+	<property environment="env" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.5" />
+	<property name="source" value="1.5" />
+	<property name="src" value="src" />
+	<property name="bin" value="target" />
+	<path id="tools.classpath">
+		<pathelement location="." />
+		<pathelement location="lib/javaee.jar" />
+		<pathelement location="lib/standard.jar" />
+		<pathelement location="lib/commons-beanutils.jar" />
+		<pathelement location="lib/commons-logging.jar" />
+		<pathelement location="lib/proxool-0.9.0RC3.jar" />
+	</path>
+	<target name="init">
+		<mkdir dir="${bin}" />
+		<copy includeemptydirs="false" todir="${bin}">
+			<fileset dir="${src}" excludes="**/*.launch, **/*.java" />
+		</copy>
+	</target>
+	<target name="clean">
+		<delete includeemptydirs="true" defaultexcludes="true">
+			<fileset dir="${bin}" includes="**/*" />
+		</delete>
+	</target>
+	<target depends="init" name="build">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac debug="false"
+		       encoding="UTF-8"
+		       debuglevel="${debuglevel}"
+		       destdir="${bin}"
+		       source="${source}"
+		       target="${target}">
+			<src path="${src}" />
+			<classpath refid="tools.classpath" />
+		</javac>
+	</target>
+	<target name="jar" depends="build">
+		<property name="version.num" value="3.0" />
+		<property name="webJar" value="${bin}/org.hao.web-${version.num}.jar" />
+		<property name="utilJar"
+		          value="${bin}/org.hao.util-${version.num}.jar" />
+		<property name="ftpJar" value="${bin}/org.hao.ftp-${version.num}.jar" />
+		<property name="imageJar"
+		          value="${bin}/org.hao.image-${version.num}.jar" />
+		<property name="mailJar"
+		          value="${bin}/org.hao.mail-${version.num}.jar" />
+		<property name="swingJar"
+		          value="${bin}/org.hao.swing-${version.num}.jar" />
+		<property name="MANIFEST" value="${bin}/MANIFEST.MF" />
+		<delete file="${webJar}" />
+		<delete file="${utilJar}" />
+		<delete file="${imageJar}" />
+		<delete file="${ftpJar}" />
+		<delete file="${mailJar}" />
+		<delete file="${swingJar}" />
+		<delete file="${MANIFEST}" />
+		<echo>删除原有的文件</echo>
+		<tstamp>
+			<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
+		</tstamp>
+		<manifest file="${MANIFEST}">
+			<attribute name="Built-By" value="胡文昊" />
+			<attribute name="Created-By" value="胡文昊" />
+			<attribute name="Sealed" value="false" />
+			<attribute name="Version" value="${version.num}" />
+			<attribute name="Built-Date" value="${TODAY}" />
+		</manifest>
+		<echo>开始创建${utilJar}</echo>
+		<jar encoding="UTF-8"
+		     manifestencoding="UTF-8"
+		     destfile="${utilJar}"
+		     basedir="${bin}"
+		     includes="org/hao/util/**/*.class"
+		     manifest="${MANIFEST}" />
+		<echo>创建${utilJar}成功</echo>
+		<echo>开始创建${ftpJar}</echo>
+		<jar encoding="UTF-8"
+		     manifestencoding="UTF-8"
+		     destfile="${ftpJar}"
+		     basedir="${bin}"
+		     includes="org/hao/ftp/**/*.class"
+		     manifest="${MANIFEST}" />
+		<echo>创建${ftpJar}成功</echo>
+		<echo>开始创建${mailJar}</echo>
+		<jar encoding="UTF-8"
+		     manifestencoding="UTF-8"
+		     destfile="${mailJar}"
+		     basedir="${bin}"
+		     includes="org/hao/mail/**/*.class"
+		     manifest="${MANIFEST}" />
+		<echo>创建${mailJar}成功</echo>
+		<echo>开始创建${swingJar}</echo>
+		<jar encoding="UTF-8"
+		     manifestencoding="UTF-8"
+		     destfile="${swingJar}"
+		     basedir="${bin}"
+		     includes="org/hao/swing/**/*.class"
+		     manifest="${MANIFEST}" />
+		<echo>创建${swingJar}成功</echo>
+		<echo>开始创建${imageJar}</echo>
+		<jar encoding="UTF-8"
+		     manifestencoding="UTF-8"
+		     destfile="${imageJar}"
+		     basedir="${bin}"
+		     includes="org/hao/image/**/*.class"
+		     manifest="${MANIFEST}" />
+		<echo>创建${imageJar}成功</echo>
+		<echo>开始创建${webJar}</echo>
+		<jar encoding="UTF-8"
+		     manifestencoding="UTF-8"
+		     destfile="${webJar}"
+		     basedir="${bin}"
+		     includes="org/hao/web/**/*.class"
+		     manifest="${MANIFEST}">
+			<zipfileset dir="tlds" includes="*.tld" prefix="META-INF" />
+		</jar>
+		<echo>创建${webJar}成功</echo>
+	</target>
+</project>

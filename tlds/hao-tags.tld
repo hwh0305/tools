@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<tlib-version>1.1</tlib-version>
+	<short-name>hao</short-name>
+	<uri>/hao-tags</uri>
+	<tag>
+		<name>base</name>
+		<tag-class>org.hao.web.tags.BasePathTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>target</name>
+		</attribute>
+	</tag>
+	<tag>
+		<name>page</name>
+		<tag-class>org.hao.web.tags.PageTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>url</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>pageBean</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>field</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>resource</name>
+		<tag-class>org.hao.web.tags.ResourceTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>key</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<function>
+		<name>AND</name>
+		<function-class>org.hao.web.tags.TagFunction</function-class>
+		<function-signature>int AND(int, int)</function-signature>
+	</function>
+	<function>
+		<name>OR</name>
+		<function-class>org.hao.web.tags.TagFunction</function-class>
+		<function-signature>int OR(int, int)</function-signature>
+	</function>
+	<function>
+		<name>XOR</name>
+		<function-class>org.hao.web.tags.TagFunction</function-class>
+		<function-signature>int XOR(int, int)</function-signature>
+	</function>
+	<function>
+		<name>NOT</name>
+		<function-class>org.hao.web.tags.TagFunction</function-class>
+		<function-signature>int NOT(int)</function-signature>
+	</function>
+	<function>
+		<name>encodeUTF8</name>
+		<function-class>org.hao.web.tags.TagFunction</function-class>
+		<function-signature>
+			java.lang.String encodeUTF8(java.lang.String)
+		</function-signature>
+	</function>
+	<function>
+		<name>decodeUTF8</name>
+		<function-class>org.hao.web.tags.TagFunction</function-class>
+		<function-signature>
+			java.lang.String decodeUTF8(java.lang.String)
+		</function-signature>
+	</function>
+	<function>
+		<name>encode</name>
+		<function-class>org.hao.web.tags.TagFunction</function-class>
+		<function-signature>
+			java.lang.String encode(java.lang.String, java.lang.String)
+		</function-signature>
+	</function>
+	<function>
+		<name>decode</name>
+		<function-class>org.hao.web.tags.TagFunction</function-class>
+		<function-signature>
+			java.lang.String decode(java.lang.String, java.lang.String)
+		</function-signature>
+	</function>
+</taglib>
